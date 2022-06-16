@@ -10,7 +10,7 @@ public class PersonaChange extends EventChange {
     public PersonaChange(Persona persona) {
         apply((PersonaCreada event) -> {
             persona.nombre = event.getNombre();
-            persona.clasificacion = event.getClasificacion();
+            persona.clasificacion = new Clasificacion(event.getClasificacionId(), event.getRol(), event.getActividad());
         });
 
         apply((NombreCambiado event) -> {

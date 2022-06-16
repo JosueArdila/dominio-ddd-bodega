@@ -1,24 +1,38 @@
 package co.com.sofka.persona.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofka.persona.Clasificacion;
+import co.com.sofka.persona.identities.ClasificacionId;
+import co.com.sofka.persona.values.Actividad;
 import co.com.sofka.persona.values.Nombre;
+import co.com.sofka.persona.values.Rol;
 
 public class PersonaCreada extends DomainEvent {
     private final Nombre nombre;
-    private final Clasificacion clasificacion;
+    private final ClasificacionId clasificacionId;
+    private final Rol rol;
+    private final Actividad actividad;
 
-    public PersonaCreada(Nombre nombre, Clasificacion clasificacion) {
+    public PersonaCreada(Nombre nombre, ClasificacionId clasificacionId, Rol rol, Actividad actividad) {
         super("sofka.persona.PersonaCreada");
         this.nombre = nombre;
-        this.clasificacion = clasificacion;
+        this.clasificacionId = clasificacionId;
+        this.rol = rol;
+        this.actividad = actividad;
     }
 
     public Nombre getNombre() {
         return nombre;
     }
 
-    public Clasificacion getClasificacion() {
-        return clasificacion;
+    public ClasificacionId getClasificacionId() {
+        return clasificacionId;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public Actividad getActividad() {
+        return actividad;
     }
 }
