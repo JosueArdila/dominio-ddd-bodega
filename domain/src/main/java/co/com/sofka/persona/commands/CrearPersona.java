@@ -1,30 +1,37 @@
 package co.com.sofka.persona.commands;
 
 import co.com.sofka.domain.generic.Command;
-import co.com.sofka.persona.Clasificacion;
+import co.com.sofka.persona.identities.ClasificacionId;
+import co.com.sofka.persona.values.Actividad;
 import co.com.sofka.persona.values.Nombre;
-import co.com.sofka.persona.identities.PersonaId;
+import co.com.sofka.persona.values.Rol;
 
 public class CrearPersona extends Command {
-    private final PersonaId personaId;
     private final Nombre nombre;
-    private final Clasificacion clasificacion;
+    private final ClasificacionId clasificacionId;
+    private final Rol rol;
+    private final Actividad actividad;
 
-    public CrearPersona(PersonaId personaId, Nombre nombre, Clasificacion clasificacion) {
-        this.personaId = personaId;
+    public CrearPersona(Nombre nombre, ClasificacionId clasificacionId, Rol rol, Actividad actividad) {
         this.nombre = nombre;
-        this.clasificacion = clasificacion;
-    }
-
-    public PersonaId getPersonaId() {
-        return personaId;
+        this.clasificacionId = clasificacionId;
+        this.rol = rol;
+        this.actividad = actividad;
     }
 
     public Nombre getNombre() {
         return nombre;
     }
 
-    public Clasificacion getClasificacion() {
-        return clasificacion;
+    public ClasificacionId getClasificacionId() {
+        return clasificacionId;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public Actividad getActividad() {
+        return actividad;
     }
 }

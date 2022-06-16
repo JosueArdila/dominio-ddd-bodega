@@ -19,12 +19,14 @@ public class Persona extends AggregateEvent<PersonaId> {
     protected Nombre nombre;
     protected Clasificacion clasificacion;
 
-    public Persona(PersonaId personaId, Nombre nombre, Clasificacion clasificacion) {
+    public Persona(PersonaId personaId, Nombre nombre, ClasificacionId clasificacionId, Rol rol, Actividad actividad) {
         super(personaId);
         Objects.requireNonNull(nombre);
-        Objects.requireNonNull(clasificacion);
+        Objects.requireNonNull(clasificacionId);
+        Objects.requireNonNull(rol);
+        Objects.requireNonNull(actividad);
         subscribe(new PersonaChange(this));
-        appendChange(new PersonaCreada(nombre, clasificacion)).apply();
+        appendChange(new PersonaCreada(nombre, clasificacionId, rol, actividad)).apply();
     }
 
     private Persona(PersonaId personaId) {
