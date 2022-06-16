@@ -7,7 +7,7 @@ public class UbicacionChange extends EventChange {
     public UbicacionChange(Ubicacion ubicacion) {
 
         apply((UbicacionCreada event) -> {
-            ubicacion.espacio = event.getEspacio();
+            ubicacion.espacio = new Espacio(event.getEspacioId(), event.getDimension(), event.getDireccion());
             ubicacion.categoria = event.getCategoria();
         });
 

@@ -17,9 +17,9 @@ public class Ubicacion extends AggregateEvent<UbicacionId> {
     protected Espacio espacio;
     protected Categoria categoria;
 
-    public Ubicacion(UbicacionId id, Espacio espacio, Categoria categoria) {
+    public Ubicacion(UbicacionId id, EspacioId espacioId, Estado estado, Dimension dimension, Direccion direccion, Categoria categoria) {
         super(id);
-        appendChange(new UbicacionCreada(espacio, categoria)).apply();
+        appendChange(new UbicacionCreada(espacioId, estado, dimension, direccion, categoria)).apply();
     }
 
     private Ubicacion(UbicacionId id) {
