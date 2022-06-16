@@ -1,8 +1,8 @@
 package co.com.sofka.ubicacion.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.generic.values.Dimension;
 import co.com.sofka.ubicacion.identities.EspacioId;
-import co.com.sofka.ubicacion.values.Dimension;
 
 public class DimensionDelEspaciocambiada extends DomainEvent {
     private final EspacioId espacioId;

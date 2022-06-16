@@ -1,9 +1,9 @@
 package co.com.sofka.ubicacion.commands;
 
 import co.com.sofka.domain.generic.Command;
+import co.com.sofka.generic.values.Dimension;
 import co.com.sofka.ubicacion.identities.EspacioId;
 import co.com.sofka.ubicacion.identities.UbicacionId;
-import co.com.sofka.ubicacion.values.Dimension;
 
 public class CambiarDimensionDelEspacio extends Command {
 

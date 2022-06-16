@@ -1,8 +1,8 @@
 package co.com.sofka.ubicacion.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.generic.values.Categoria;
 import co.com.sofka.ubicacion.Espacio;
-import co.com.sofka.ubicacion.values.Categoria;
 
 public class UbicacionCreada extends DomainEvent {
 

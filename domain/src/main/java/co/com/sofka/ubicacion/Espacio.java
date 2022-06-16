@@ -1,7 +1,7 @@
 package co.com.sofka.ubicacion;
 
 import co.com.sofka.domain.generic.Entity;
-import co.com.sofka.ubicacion.values.Dimension;
+import co.com.sofka.generic.values.Dimension;
 import co.com.sofka.ubicacion.values.Direccion;
 import co.com.sofka.ubicacion.identities.EspacioId;
 import co.com.sofka.ubicacion.values.Estado;

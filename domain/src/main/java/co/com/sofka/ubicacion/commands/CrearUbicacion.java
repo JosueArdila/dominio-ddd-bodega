@@ -1,7 +1,7 @@
 package co.com.sofka.ubicacion.commands;
 
 import co.com.sofka.domain.generic.Command;
-import co.com.sofka.ubicacion.values.Categoria;
+import co.com.sofka.generic.values.Categoria;
 import co.com.sofka.ubicacion.Espacio;
 import co.com.sofka.ubicacion.identities.UbicacionId;
 

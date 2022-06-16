@@ -1,7 +1,7 @@
 package co.com.sofka.ubicacion.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofka.ubicacion.values.Categoria;
+import co.com.sofka.generic.values.Categoria;
 
 public class CategoriaCambiada extends DomainEvent {
     private final Categoria categoria;
