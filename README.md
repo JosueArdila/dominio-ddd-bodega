@@ -16,30 +16,25 @@ Se crea un pet project basado en el servicio de inventario de una bodega, se imp
 
 https://drive.google.com/file/d/1rl_guvE7pfXtkioQ09bFbJCIHkXN16zn/view?usp=sharing
 
-## Análisis 
-
-![img.png](domain/src/main/resources/analisis1.png)
-
-![img.png](domain/src/main/resources/analisis2.png)
-
-## Modelo de dominio
-
-
-![img.png](domain/src/main/resources/modelo.png)
-
-## Eventos
-
-
-![img.png](domain/src/main/resources/eventos1.png)
-
-![img_1.png](domain/src/main/resources/eventos2.png)
-
-![img.png](domain/src/main/resources/eventos3.png)
-
-
-### Integrantes 
-
+### Integrantes
 
 <strong>Josué David Ardila Parra  </br>
 Steven Calderon Guzman </br>
 <strong>Sebastian Pineda Romero </strong>
+
+## Análisis 
+
+![img.png](img/analisis1.png)
+
+![img.png](img/analisis2.png)
+
+
+## Modelo de dominio
+
+![img.png](img/modelo.png)
+
+## Eventos
+
+![img.png](img/event1.png)
+![img.png](img/event2.png)
+![img.png](img/event3.png)
