@@ -3,6 +3,7 @@ package co.com.sofka.ubicacion;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.ubicacion.events.*;
+import co.com.sofka.ubicacion.identities.EspacioId;
 import co.com.sofka.ubicacion.values.Categoria;
 import co.com.sofka.ubicacion.values.Dimension;
 import co.com.sofka.ubicacion.values.Direccion;
@@ -36,15 +37,15 @@ public class Ubicacion extends AggregateEvent<UbicacionId> {
         appendChange(new CategoriaCambiada(categoria)).apply();
     }
 
-    public void actualizarEstadoDelEspacio(Estado estado) {
-        appendChange(new EstadoDelEspacioActualizado(estado)).apply();
+    public void actualizarEstadoDelEspacio(EspacioId espacioId, Estado estado) {
+        appendChange(new EstadoDelEspacioActualizado(espacioId, estado)).apply();
     }
 
-    public void cambiarDimensionDelEspacio(Dimension dimension) {
-        appendChange(new DimensionDelEspaciocambiada(dimension)).apply();
+    public void cambiarDimensionDelEspacio(EspacioId espacioId, Dimension dimension) {
+        appendChange(new DimensionDelEspaciocambiada(espacioId, dimension)).apply();
     }
 
-    public void cambiarDireccionDelEspacio(Direccion direccion) {
-        appendChange(new DireccionDelEspacioCambiada(direccion)).apply();
+    public void cambiarDireccionDelEspacio(EspacioId espacioId, Direccion direccion) {
+        appendChange(new DireccionDelEspacioCambiada(espacioId, direccion)).apply();
     }
 }

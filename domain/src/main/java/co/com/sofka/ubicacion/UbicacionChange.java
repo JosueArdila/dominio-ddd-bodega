@@ -16,15 +16,24 @@ public class UbicacionChange extends EventChange {
         });
 
         apply((EstadoDelEspacioActualizado event) -> {
-            ubicacion.espacio.estado = event.getEstado();
+            if(!ubicacion.espacio.identity().equals(event.getEspacioId())){
+                throw new IllegalArgumentException("No tiene la identidad correcta");
+            }
+            ubicacion.espacio.actualizarEstado(event.getEstado());
         });
 
         apply((DireccionDelEspacioCambiada event) -> {
-            ubicacion.espacio.direccion = event.getDireccion();
+            if(!ubicacion.espacio.identity().equals(event.getEspacioId())){
+                throw new IllegalArgumentException("No tiene la identidad correcta");
+            }
+            ubicacion.espacio.cambiarDireccion(event.getDireccion());
         });
 
         apply((DimensionDelEspaciocambiada event) -> {
-            ubicacion.espacio.dimension = event.getDimension();
+            if(!ubicacion.espacio.identity().equals(event.getEspacioId())){
+                throw new IllegalArgumentException("No tiene la identidad correcta");
+            }
+            ubicacion.espacio.cambiarDimension(event.getDimension());
         });
 
 

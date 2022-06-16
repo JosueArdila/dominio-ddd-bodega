@@ -10,9 +10,9 @@ import java.util.Objects;
 
 public class Espacio extends Entity<EspacioId> {
 
-    protected Estado estado;
-    protected Dimension dimension;
-    protected Direccion direccion;
+    private Estado estado;
+    private Dimension dimension;
+    private Direccion direccion;
 
     public Espacio(EspacioId entityId, Dimension dimension, Direccion direccion) {
         super(entityId);
