@@ -23,10 +23,10 @@ public class Inventario extends AggregateEvent<InventarioId> {
     protected Periocidad periocidad;
     protected Map <PersonaId, Set<Producto>> productosPersona;
 
-    public Inventario(InventarioId entityId, Periocidad periocidad) {
+    public Inventario(InventarioId entityId, Periocidad periocidad, Set<PersonaId> personaIds) {
         super(entityId);
         subscribe(new InventarioChange(this));
-        appendChange(new InventarioCreado(periocidad)).apply();
+        appendChange(new InventarioCreado(periocidad, personaIds)).apply();
     }
 
     private Inventario(InventarioId entityId){
@@ -77,12 +77,21 @@ public class Inventario extends AggregateEvent<InventarioId> {
     }
 
     protected Optional<Producto> encontrarProductoDeLaPersona(PersonaId personaId, ProductoId productoId){
-        if(!productosPersona.containsKey(personaId)){
-            throw new IllegalArgumentException("La persona no se encontro");
-        }
-        var productos = productosPersona.get(personaId);
+
+        comprobarExistenciaCliente(personaId);
+        var productos= obtenerListaProductosPorPersonaId(personaId);
+
         return productos.stream()
                 .filter(producto -> producto.identity().equals(productoId))
                 .findFirst();
+    }
+    private void comprobarExistenciaCliente(PersonaId personaId){
+        if(!productosPersona.containsKey(personaId)){
+            throw new IllegalArgumentException("La persona no se encontro");
+        }
+    }
+
+    protected Set<Producto> obtenerListaProductosPorPersonaId(PersonaId personaId){
+        return productosPersona.get(personaId);
     }
 }
