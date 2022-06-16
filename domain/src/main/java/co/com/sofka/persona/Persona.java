@@ -8,7 +8,9 @@ import co.com.sofka.persona.events.PersonaCreada;
 import co.com.sofka.persona.events.RolDeUnaClasificacionCambiado;
 import co.com.sofka.persona.identities.ClasificacionId;
 import co.com.sofka.persona.identities.PersonaId;
-import co.com.sofka.persona.values.*;
+import co.com.sofka.persona.values.Actividad;
+import co.com.sofka.persona.values.Nombre;
+import co.com.sofka.persona.values.Rol;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +23,7 @@ public class Persona extends AggregateEvent<PersonaId> {
         super(personaId);
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(clasificacion);
+        subscribe(new PersonaChange(this));
         appendChange(new PersonaCreada(nombre, clasificacion)).apply();
     }
 
