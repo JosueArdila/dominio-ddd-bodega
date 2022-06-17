@@ -1,8 +1,7 @@
-package co.com.sofka.inventario.factories;
+package co.com.sofka.inventario;
 
 import co.com.sofka.generic.values.Categoria;
 import co.com.sofka.generic.values.Dimension;
-import co.com.sofka.inventario.Producto;
 import co.com.sofka.inventario.identities.ProductoId;
 import co.com.sofka.inventario.values.Descripcion;
 import co.com.sofka.inventario.values.FechaEntrada;
@@ -31,5 +30,7 @@ public class ProductoFactory {
         return this;
     }
 
-    prot
+    protected Producto producto() {
+        return producto;
+    }
 }

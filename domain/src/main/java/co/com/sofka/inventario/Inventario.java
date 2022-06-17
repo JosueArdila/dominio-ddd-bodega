@@ -21,7 +21,7 @@ import java.util.Set;
 public class Inventario extends AggregateEvent<InventarioId> {
 
     protected Periocidad periocidad;
-    protected Map <PersonaId, Set<Producto>> productosPersona;
+    protected Map<PersonaId, Set<Producto>> productosPersona;
 
     public Inventario(InventarioId entityId, Periocidad periocidad, Set<PersonaId> personaIds) {
         super(entityId);
@@ -29,69 +29,76 @@ public class Inventario extends AggregateEvent<InventarioId> {
         appendChange(new InventarioCreado(periocidad, personaIds)).apply();
     }
 
-    private Inventario(InventarioId entityId){
+    private Inventario(InventarioId entityId) {
         super(entityId);
         subscribe(new InventarioChange(this));
     }
 
-    public static Inventario from(InventarioId inventarioId, List<DomainEvent> events){
+    public static Inventario from(InventarioId inventarioId, List<DomainEvent> events) {
         Inventario inventario = new Inventario(inventarioId);
         events.forEach(inventario::applyEvent);
         return inventario;
     }
 
-    public void cambiarPeriocidad(Periocidad periocidad){
+    public void cambiarPeriocidad(Periocidad periocidad) {
         appendChange(new PeriocidadCambiada(periocidad)).apply();
     }
 
-    public void agregarProductoAUnaPersona(PersonaId personaId, Producto producto){
-        appendChange(new ProductoDeUnaPersonaAgregado(personaId, producto)).apply();
+    public void agregarProductoAUnaPersona(PersonaId personaId, ProductoFactory productoFactory) {
+        var producto = productoFactory.producto();
+        appendChange(
+                new ProductoDeUnaPersonaAgregado(
+                        personaId, producto.identity(), producto.categoria(), producto.dimension(),
+                        producto.descripcion(), producto.fechaEntrada(), producto.stock(), producto.ubicacionId()
+                )
+        ).apply();
     }
 
-    public void cambiarDescripcionDeUnProducto(PersonaId personaId, ProductoId productoId, Descripcion descripcion){
+    public void cambiarDescripcionDeUnProducto(PersonaId personaId, ProductoId productoId, Descripcion descripcion) {
         appendChange(new DescripcionDeUnProductoCambiado(personaId, productoId, descripcion)).apply();
     }
 
-    public void aumentarStockDeUnProducto(PersonaId personaId, ProductoId productoId, Stock stock){
+    public void aumentarStockDeUnProducto(PersonaId personaId, ProductoId productoId, Stock stock) {
         appendChange(new StockDeUnProductoAumentado(personaId, productoId, stock)).apply();
     }
 
-    public void disminuirStockDeUnProducto(PersonaId personaId, ProductoId productoId, Stock stock){
+    public void disminuirStockDeUnProducto(PersonaId personaId, ProductoId productoId, Stock stock) {
         appendChange(new StockDeUnProductoDisminuido(personaId, productoId, stock)).apply();
     }
 
-    public void asignarUbicacionDeUnProducto(PersonaId personaId, ProductoId productoId, UbicacionId ubicacionId){
+    public void asignarUbicacionDeUnProducto(PersonaId personaId, ProductoId productoId, UbicacionId ubicacionId) {
         appendChange(new UbicacionDeUnProductoAsignado(personaId, productoId, ubicacionId)).apply();
     }
 
-    public void darSalidaAUnProducto(PersonaId personaId, ProductoId productoId){
+    public void darSalidaAUnProducto(PersonaId personaId, ProductoId productoId) {
         appendChange(new ProductoDespachado(personaId, productoId)).apply();
     }
 
-    public void cambiarCategoriaDeUnProducto(PersonaId personaId, ProductoId productoId,  Categoria categoria){
-     appendChange(new CategoriaDeUnProductoCambiada(personaId, productoId, categoria)).apply();
+    public void cambiarCategoriaDeUnProducto(PersonaId personaId, ProductoId productoId, Categoria categoria) {
+        appendChange(new CategoriaDeUnProductoCambiada(personaId, productoId, categoria)).apply();
     }
 
-    public void cambiarDimensionDeUnProducto(PersonaId personaId, ProductoId productoId, Dimension dimension){
+    public void cambiarDimensionDeUnProducto(PersonaId personaId, ProductoId productoId, Dimension dimension) {
         appendChange(new DimensionDeUnProductoCambiada(personaId, productoId, dimension)).apply();
     }
 
-    protected Optional<Producto> encontrarProductoDeLaPersona(PersonaId personaId, ProductoId productoId){
+    protected Optional<Producto> encontrarProductoDeLaPersona(PersonaId personaId, ProductoId productoId) {
 
         comprobarExistenciaCliente(personaId);
-        var productos= obtenerListaProductosPorPersonaId(personaId);
+        var productos = obtenerListaProductosPorPersonaId(personaId);
 
         return productos.stream()
                 .filter(producto -> producto.identity().equals(productoId))
                 .findFirst();
     }
-    private void comprobarExistenciaCliente(PersonaId personaId){
-        if(!productosPersona.containsKey(personaId)){
+
+    private void comprobarExistenciaCliente(PersonaId personaId) {
+        if (!productosPersona.containsKey(personaId)) {
             throw new IllegalArgumentException("La persona no se encontro");
         }
     }
 
-    protected Set<Producto> obtenerListaProductosPorPersonaId(PersonaId personaId){
+    protected Set<Producto> obtenerListaProductosPorPersonaId(PersonaId personaId) {
         return productosPersona.get(personaId);
     }
 }
