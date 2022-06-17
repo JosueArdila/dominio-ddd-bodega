@@ -44,8 +44,14 @@ public class Inventario extends AggregateEvent<InventarioId> {
         appendChange(new PeriocidadCambiada(periocidad)).apply();
     }
 
-    public void agregarProductoAUnaPersona(PersonaId personaId, Producto producto){
-        appendChange(new ProductoDeUnaPersonaAgregado(personaId, producto)).apply();
+    public void agregarProductoAUnaPersona(PersonaId personaId, ProductoFactory productoFactory) {
+        var producto = productoFactory.producto();
+        appendChange(
+                new ProductoDeUnaPersonaAgregado(
+                        personaId, producto.identity(), producto.categoria(), producto.dimension(),
+                        producto.descripcion(), producto.fechaEntrada(), producto.stock(), producto.ubicacionId()
+                )
+        ).apply();
     }
 
     public void cambiarDescripcionDeUnProducto(PersonaId personaId, ProductoId productoId, Descripcion descripcion){
