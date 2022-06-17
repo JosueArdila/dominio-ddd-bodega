@@ -4,18 +4,13 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class Dimension implements ValueObject<Dimension.Value> {
+public class Dimension implements ValueObject<Integer> {
     private final Integer alto;
     private final Integer largo;
     private final Integer ancho;
 
-    public interface Value {
-        Integer alto();
+    private final Integer volumen;
 
-        Integer largo();
-
-        Integer ancho();
-    }
 
     public Dimension(int alto, int largo, int ancho) {
         this.alto = alto;
@@ -30,26 +25,16 @@ public class Dimension implements ValueObject<Dimension.Value> {
         if (this.ancho <= 0) {
             throw new IllegalArgumentException("El ancho debe ser mayor a 0");
         }
+        this.volumen = calcularVolumen(alto, largo, ancho);
     }
 
     @Override
-    public Value value() {
-        return new Value() {
-            @Override
-            public Integer alto() {
-                return null;
-            }
+    public Integer value() {
+        return volumen;
+    }
 
-            @Override
-            public Integer largo() {
-                return null;
-            }
-
-            @Override
-            public Integer ancho() {
-                return null;
-            }
-        };
+    private int calcularVolumen(int alto, int largo, int ancho) {
+        return alto * largo * ancho;
     }
 
     @Override
@@ -57,11 +42,11 @@ public class Dimension implements ValueObject<Dimension.Value> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dimension dimension = (Dimension) o;
-        return alto.equals(dimension.alto) && largo.equals(dimension.largo) && ancho.equals(dimension.ancho);
+        return volumen.equals(dimension.volumen);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(alto, largo, ancho);
+        return Objects.hash(volumen);
     }
 }
