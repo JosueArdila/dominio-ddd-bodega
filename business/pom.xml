@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>bodega</artifactId>
-        <groupId>co.com.sofka</groupId>
+        <groupId>org.example.sofka</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -32,6 +32,13 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>3.6.28</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.example.sofka</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

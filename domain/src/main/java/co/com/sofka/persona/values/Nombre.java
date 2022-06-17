@@ -29,6 +29,6 @@ public class Nombre implements ValueObject<String> {
 
     @Override
     public String value() {
-        return null;
+        return valor;
     }
 }
