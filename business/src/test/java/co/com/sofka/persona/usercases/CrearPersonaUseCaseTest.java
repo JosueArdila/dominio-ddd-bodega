@@ -15,24 +15,23 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static co.com.sofka.persona.values.Rol.Roles.CLIENTE;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CrearPersonaUseCaseTest {
 
     @Test
-    void crearNuevaPersona(){
-        var nombre= new Nombre("Sebastian");
+    void crearNuevaPersona() {
+        var nombre = new Nombre("Sebastian");
         var clasificacionId = new ClasificacionId();
-        var rol= new Rol(CLIENTE);
-        var actividad= new Actividad("Actividad prueba1");
+        var rol = new Rol(CLIENTE);
+        var actividad = new Actividad("Actividad prueba1");
 
- var command= new CrearPersona(nombre, clasificacionId, rol, actividad );
- var useCase = new CrearPersonaUseCase();
+        var command = new CrearPersona(nombre, clasificacionId, rol, actividad);
+        var useCase = new CrearPersonaUseCase();
 
- List<DomainEvent> events = UseCaseHandler.getInstance().
-         syncExecutor(useCase,new RequestCommand<>(command)).
-         orElseThrow().
-         getDomainEvents();
+        List<DomainEvent> events = UseCaseHandler.getInstance().
+                syncExecutor(useCase, new RequestCommand<>(command)).
+                orElseThrow().
+                getDomainEvents();
 
         PersonaCreada event = (PersonaCreada) events.get(0);
         Assertions.assertEquals("Sebastian", event.getNombre().value());
