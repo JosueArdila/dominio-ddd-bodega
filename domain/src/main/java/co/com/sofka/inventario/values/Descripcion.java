@@ -15,7 +15,7 @@ public class Descripcion implements ValueObject<String> {
 
     @Override
     public String value() {
-        return null;
+        return descripcion;
     }
 
     @Override
